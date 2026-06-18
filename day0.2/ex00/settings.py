@@ -1,0 +1,5 @@
+name = "Judith"
+surname = "Meyer"
+age = "25"
+profession = "Python-Django Developer"
+title = "My CV"
