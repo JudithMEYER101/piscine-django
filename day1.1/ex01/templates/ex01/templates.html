@@ -1,0 +1,25 @@
+{% extends "ex01/base.html" %}
+{% load static %}
+
+{% block title %}Ex01 : Moteur de template.{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'ex01/style2.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Ex01 : Moteur de template.</h1>
+<p>Django’s template engine separates presentation from Python code. Views pass data to templates using a context.</p>
+
+<h2>Blocks</h2>
+<p>Blocks define replaceable areas in a base template. Child templates override these blocks.</p>
+
+<h2>For loops</h2>
+<p>The template language can loop over values using for ... in.</p>
+
+<h2>If structures</h2>
+<p>Templates can conditionally display content with if statements.</p>
+
+<h2>Context variables</h2>
+<p>Variables passed by a view can be displayed in templates using double braces.</p>
+{% endblock %}
