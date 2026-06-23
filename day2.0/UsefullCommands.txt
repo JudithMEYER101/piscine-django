@@ -3,14 +3,58 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
+PostgreSQL setup : 
+psql -U postgres
+CREATE ROLE djangouser WITH LOGIN PASSWORD 'secret';
+CREATE DATABASE formationdjango OWNER djangouser;
+GRANT ALL PRIVILEGES ON DATABASE formationdjango TO djangouser;
+\q
+
 run server :
 python3 manage.py runserver
 
+create migrations:
+python3 manage.py makemigrations
+python3 manage.py migrate
 
+check tables:
+\dt
+
+describe table:
+\d table_name
+
+show table content:
+SELECT * FROM table_name;
+
+quit psql:
+\q
 enter sql:
 
 psql -h localhost -U djangouser -d formationdjango
+{
+    check tables:
+    \dt
 
+    describe table:
+    \d table_name
+
+    show table content:
+    SELECT * FROM table_name;
+
+    quit psql:
+    \q
+
+
+    Show readable junction table (ex10):
+    in sql:
+
+    formationdjango=> SELECT
+        m.title,
+        p.name
+    FROM ex10_movies_characters mc
+    JOIN ex10_movies m ON mc.movies_id = m.episode_nb
+    JOIN ex10_people p ON mc.people_id = p.id;
+}
 
 load data (ex09)
 python3 manage.py loaddata ex09_initial_data.json
@@ -19,12 +63,9 @@ python3 manage.py loaddata ex09_initial_data.json
 load data (ex10)
 python3 manage.py loaddata ex10_initial_data.json
 
-Show readable junction table (ex10):
-in sql:
 
-formationdjango=> SELECT
-    m.title,
-    p.name
-FROM ex10_movies_characters mc
-JOIN ex10_movies m ON mc.movies_id = m.episode_nb
-JOIN ex10_people p ON mc.people_id = p.id;
+if clean needed: 
+clean generated files:
+find . -path "*/migrations/*.py" ! -name "__init__.py" -delete
+find . -path "*/migrations/*.pyc" -delete
+find . -type d -name "__pycache__" -exec rm -rf {} +
