@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex10</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results is not None %}
+        {% if results %}
+            <ul>
+                {% for result in results %}
+                    <li>
+                        {{ result.movie.title }} -
+                        {{ result.character.name }} -
+                        {{ result.character.gender }} -
+                        {{ result.planet.name }} -
+                        {{ result.planet.diameter }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nothing corresponding to your research</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

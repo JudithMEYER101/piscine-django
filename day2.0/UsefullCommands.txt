@@ -1,0 +1,30 @@
+setup venv : 
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+run server :
+python3 manage.py runserver
+
+
+enter sql:
+
+psql -h localhost -U djangouser -d formationdjango
+
+
+load data (ex09)
+python3 manage.py loaddata ex09_initial_data.json
+
+
+load data (ex10)
+python3 manage.py loaddata ex10_initial_data.json
+
+Show readable junction table (ex10):
+in sql:
+
+formationdjango=> SELECT
+    m.title,
+    p.name
+FROM ex10_movies_characters mc
+JOIN ex10_movies m ON mc.movies_id = m.episode_nb
+JOIN ex10_people p ON mc.people_id = p.id;
